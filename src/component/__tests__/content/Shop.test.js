@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'; // optional
 import Shop from '../../Content/Shop';
 
 jest.mock('../../Content/Shop/Card', () => ({ item }) => (
-  <div data-testid={`card`} key={item.id}>
+  <div data-testid={`card`} key={item.id} className="card">
     <span>{item.name}</span>
     <span>{item.price}</span>
   </div>
@@ -17,7 +17,7 @@ const mockItems = [
 ];
 
 const mockItemsNull = [
-  { id: 1, name: 'Book1', price: '20$' },
+  { id: 1, name: 'Book1', price: null },
   { id: 2, name: 'Book2', price: null },
   1,
 ];
@@ -30,7 +30,6 @@ describe('Shop Component', () => {
   describe('Quando há livros', () => {
     it('Renders Cards', () => {
       render(<Shop items={mockItems} />);
-      screen.debug();
       expect(screen.queryAllByTestId('card').length).toBe(3);
     });
   });
@@ -48,7 +47,8 @@ describe('Shop Component', () => {
     });
     it('Does not render if an item isn`t an object, or have null properties', () => {
       render(<Shop items={mockItemsNull} />);
-      expect(screen.queryByRole('div')).not.toBeInTheDocument();
+      screen.debug();
+      expect(screen.queryAllByTestId('card').length).toBe(0);
       expect(screen.queryByText('No items')).toBeInTheDocument();
     });
     it('Does render `No items` if received all items have null or undefined properties', () => {
@@ -57,4 +57,5 @@ describe('Shop Component', () => {
       expect(screen.queryByText('No items')).toBeInTheDocument();
     });
   });
+
 });
