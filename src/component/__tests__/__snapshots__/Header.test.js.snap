@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component renders correct heading 1`] = `
+<div>
+  <nav>
+    <h1>
+      PageByPage
+    </h1>
+    <ul>
+      <li>
+        Home
+      </li>
+      <li>
+        Shop
+      </li>
+      <li>
+        Contact
+      </li>
+      <li>
+        <i
+          class="fa-solid fa-cart-shopping"
+        />
+      </li>
+    </ul>
+  </nav>
+</div>
+`;
