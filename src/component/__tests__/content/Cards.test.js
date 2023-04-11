@@ -3,7 +3,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'; // optional
 import userEvent from '@testing-library/user-event';
 import CartContext from '../../Content/Cart';
-import Item from '../../Content/Item';
+import Card from '../../Content/Shop/Card';
 
 const mockItem = {
   name: 'Book1',
@@ -14,16 +14,26 @@ const mockItem = {
 const mockCart = [];
 const addToMockCart = (item) => mockCart.push(item);
 
-describe('Item Component', () => {
+describe('Card Component', () => {
   afterEach(cleanup);
-  describe('Received Information', () => {
-    it('Renders correctly', () => {});
+
+  describe('Received info', () => {
+    it('Does render', () => {
+      render(
+        <CartContext.Provider value={[addToMockCart]}>
+          <Card item={mockItem} />
+        </CartContext.Provider>,
+      );
+      expect(screen.getByText('Book1')).toBeInTheDocument();
+      expect(screen.getByText('$20')).toBeInTheDocument();
+      expect(screen.getByRole('img')).toBeInTheDocument();
+    });
 
     it('Increments cart', async () => {
       const user = userEvent.setup();
       render(
         <CartContext.Provider value={[addToMockCart]}>
-          <Item item={mockItem} />
+          <Card item={mockItem} />
         </CartContext.Provider>,
       );
       const button = screen.getByRole('button');
@@ -34,12 +44,15 @@ describe('Item Component', () => {
       expect(mockCart).toHaveLength(2);
     });
   });
-  test('No information received', () => {
-    render(
-      <CartContext.Provider value={[addToMockCart]}>
-        <Item item={[]} />
-      </CartContext.Provider>,
-    );
-    expect(screen.getByText('This item does not exist')).toBeInTheDocument();
+
+  describe('No info received', () => {
+    it('Does not render', () => {
+      render(
+        <CartContext.Provider value={[addToMockCart]}>
+          <Card item={[]} />
+        </CartContext.Provider>,
+      );
+      expect(screen.queryAllByText('Book1')).toHaveLength(0);
+    });
   });
 });

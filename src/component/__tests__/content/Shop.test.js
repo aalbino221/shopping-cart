@@ -47,8 +47,7 @@ describe('Shop Component', () => {
     });
     it('Does not render if an item isn`t an object, or have null properties', () => {
       render(<Shop items={mockItemsNull} />);
-      screen.debug();
-      expect(screen.queryAllByTestId('card').length).toBe(0);
+      expect(screen.queryByRole('div')).not.toBeInTheDocument();
       expect(screen.queryByText('No items')).toBeInTheDocument();
     });
     it('Does render `No items` if received all items have null or undefined properties', () => {
@@ -57,5 +56,4 @@ describe('Shop Component', () => {
       expect(screen.queryByText('No items')).toBeInTheDocument();
     });
   });
-
 });
