@@ -1,13 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
-    <nav>
+    <nav className="header">
       <h1>PageByPage</h1>
       <ul>
-        <li>Home</li>
-        <li>Shop</li>
-        <li>Contact</li>
+        <Link to="/" className="routerLink">
+          <li>Home</li>
+        </Link>
+        <Link to="/shop" className="routerLink">
+          <li>Shop</li>
+        </Link>
+        <Link to="/contact" className="routerLink">
+          <li>Contact</li>
+        </Link>
         <li>
           <i className="fa-solid fa-cart-shopping" />
         </li>

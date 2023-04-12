@@ -1,0 +1,43 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 10rem;
+}
+
+.home > div {
+  width: 20%;
+}
+
+.home > div + div {
+  width: 742px;
+  height: 416px;
+  border-radius: 5px;
+  border: 2px solid black;
+  box-shadow: 4px 4px 0px black;
+  background-size: cover;
+  background-position: center;
+}
+
+.home p:nth-child(1) {
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.home p:nth-child(2) {
+  font-size: 2.2rem;
+  width: 80%;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.home button {
+  font-size: 1.9rem;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 0;
+  box-shadow: 2px 2px 0px black;
+  padding: 0.29rem 5.2rem;
+  margin-left: 1rem;
+}

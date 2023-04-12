@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, { createContext, useContext, useState } from 'react';
+// eslint-disable-next-line object-curly-newline
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const CartContext = createContext();
 
@@ -14,6 +15,14 @@ export function Cart() {
     newArray[index].amount += 1;
     setItemList(newArray);
   }
+
+  function decrement(id) {
+    const index = itemList.findIndex((item) => item.id === id);
+    const newArray = [...itemList];
+    newArray[index].amount -= 1;
+    setItemList(newArray);
+  }
+
   return (
     <div>
       <div>
@@ -30,13 +39,20 @@ export function Cart() {
               <button
                 type="button"
                 onClick={() => {
-                  increment(item.id);
+                  decrement(item.id);
                 }}
               >
                 -
               </button>
               <p data-testid="item-qnt">{item.amount}</p>
-              <button type="button">+</button>
+              <button
+                type="button"
+                onClick={() => {
+                  increment(item.id);
+                }}
+              >
+                +
+              </button>
             </div>
           </div>
         </div>

@@ -2,17 +2,17 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <div>
+    <div className="home">
       <div>
         <p>Best Online Bookstore</p>
-        <p>Discover your next great adventure here!</p>
+        <p>Discover your next great adventure here</p>
         <button onClick={() => {}} type="button">
           Shop
         </button>
       </div>
-      <div>
-        <img src="./pexels-suzy-hazewood" alt="" />
-      </div>
+      <div
+        style={{ backgroundImage: 'url(./imgs/pexels-suzy-hazelwood.jpg)' }}
+      />
     </div>
   );
 }
