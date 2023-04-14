@@ -1,9 +1,23 @@
 .App {
-  display: grid;
-  grid-template-rows: 1fr 8fr 1fr;
   height: 100vh;
 }
 
 .content {
   padding: 6rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+.contact {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+}
+
+.contact > i {
+  font-size: 10rem;
 }

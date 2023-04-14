@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react';
+import { useMatch } from 'react-router-dom';
 import CartContext from './Cart';
 
-export default function Item({ item }) {
+export default function Item() {
+  const item = useMatch('/item/:id');
   const [addToMockCart] = useContext(CartContext);
 
   return Object.keys(item).length === 0 || typeof item !== 'object' ? (
