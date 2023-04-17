@@ -16,8 +16,8 @@ export default function Shop({ items }) {
           return typeof item === 'object' ? (
             <Link
               to={`/item/${item.id}`}
-              item={item}
               className="routerBook"
+              state={{ item }}
               key={item.id}
             >
               <Card item={item} />

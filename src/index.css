@@ -2,7 +2,7 @@
 @import url(./component/styles/Home.css);
 @import url(App.css);
 @import url(./component/styles/Shop.css);
-
+@import url(./component/styles/Cart.css);
 @font-face {
   font-family: 'work-sans';
   src: url(./component/assets/workSans/WorkSans-VariableFont_wght.ttf);
@@ -30,4 +30,9 @@ body {
 
 h1 {
   margin: 0;
+}
+
+button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }

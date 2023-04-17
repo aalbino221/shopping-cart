@@ -1,13 +1,16 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line object-curly-newline
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export default CartContext;
 
-export function Cart() {
+export function Cart({ visible, handleCart }) {
   const [itemList, setItemList] = useContext(CartContext);
+  const [total, setTotal] = useState(0);
 
   function increment(id) {
     const index = itemList.findIndex((item) => item.id === id);
@@ -23,42 +26,68 @@ export function Cart() {
     setItemList(newArray);
   }
 
+  function findTotal() {
+    let totalCost = 0;
+    itemList.forEach((item) => {
+      totalCost += item.amount * item.price;
+    });
+    setTotal(totalCost);
+  }
+
+  useEffect(() => {
+    findTotal();
+  }, [itemList]);
+
   return (
-    <div>
+    <div
+      className="cart"
+      style={visible ? { display: 'flex' } : { display: 'none' }}
+    >
       <div>
-        <h1>Shopping Bad</h1>
-        <span>X</span>
-      </div>
-      {itemList.map((item) => (
-        <div key={item.id}>
-          <img src={`${item.img}`} alt="" />
-          <div>
-            <p>{item.name}</p>
-            <p>{item.price}</p>
+        <div>
+          <h1>
+            Shopping Cart
+            <span
+              onClick={handleCart}
+              role="button"
+              onKeyDown={handleCart}
+              tabIndex={-1}
+            >
+              X
+            </span>
+          </h1>
+        </div>
+        {itemList.map((item) => (
+          <div key={item.id} className="cart-item">
+            <img src={`${item.img}`} alt="" />
             <div>
-              <button
-                type="button"
-                onClick={() => {
-                  decrement(item.id);
-                }}
-              >
-                -
-              </button>
-              <p data-testid="item-qnt">{item.amount}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  increment(item.id);
-                }}
-              >
-                +
-              </button>
+              <p>{item.name}</p>
+              <p>${item.price}</p>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    decrement(item.id);
+                  }}
+                >
+                  -
+                </button>
+                <p data-testid="item-qnt">{item.amount}</p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    increment(item.id);
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
-      <p>Total: </p>
-      <button type="button">Checkout</button>
+        ))}
+        <p>Total: ${total}</p>
+        <button type="button">CHECKOUT</button>
+      </div>
     </div>
   );
 }
