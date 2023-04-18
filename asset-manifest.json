@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/shopping-cart/static/css/main.560a5f73.css",
+    "main.js": "/shopping-cart/static/js/main.217c1fb1.js",
+    "static/media/WorkSans-VariableFont_wght.ttf": "/shopping-cart/static/media/WorkSans-VariableFont_wght.a334cdd18c435a867b49.ttf",
+    "index.html": "/shopping-cart/index.html",
+    "main.560a5f73.css.map": "/shopping-cart/static/css/main.560a5f73.css.map",
+    "main.217c1fb1.js.map": "/shopping-cart/static/js/main.217c1fb1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.560a5f73.css",
+    "static/js/main.217c1fb1.js"
+  ]
+}
