@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -6,9 +7,11 @@ export default function Home() {
       <div>
         <p>Best Online Bookstore</p>
         <p>Discover your next great adventure here</p>
-        <button onClick={() => {}} type="button">
-          Shop
-        </button>
+        <Link to="/shop">
+          <button onClick={() => {}} type="button">
+            Shop
+          </button>
+        </Link>
       </div>
       <div
         style={{ backgroundImage: 'url(./imgs/pexels-suzy-hazelwood.jpg)' }}

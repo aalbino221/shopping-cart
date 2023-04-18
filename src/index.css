@@ -36,3 +36,11 @@ button:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
+
+button {
+  transition-duration: 0.1s;
+}
+
+button:active {
+  transform: scale(1.1);
+}

@@ -36,3 +36,24 @@
   transform: scale(1.1);
   cursor: pointer;
 }
+
+.header li:nth-child(4) {
+  display: flex;
+  position: relative;
+}
+
+.header li:nth-child(4) > div {
+  height: 1.2rem;
+  width: 1.2rem;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+}

@@ -40,9 +40,11 @@
 }
 
 .cart img {
-  height: 167px;
   width: 116px;
-  border: 2px solid black;
+}
+
+.cart-item p {
+  text-align: center;
 }
 
 .cart-item > div {
@@ -51,6 +53,7 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
+  padding: 0rem 2rem;
 }
 
 .cart-item > div > div {
@@ -71,4 +74,11 @@
   color: white;
   padding: 0.5rem 0rem;
   font-weight: 700;
+}
+
+.cart-itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow-y: auto;
 }

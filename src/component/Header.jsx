@@ -1,8 +1,20 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Header({ handleCart }) {
+export default function Header({ handleCart, itemList }) {
+  const [itemNumber, setItemNumber] = useState(0);
+
+  useEffect(() => {
+    setItemNumber(() => {
+      let total = 0;
+      itemList.forEach((item) => {
+        total += item.amount;
+      });
+      return total;
+    });
+  });
+
   return (
     <nav className="header">
       <h1>PageByPage</h1>
@@ -25,6 +37,7 @@ export default function Header({ handleCart }) {
             role="button"
             aria-label="Abrir carrinho"
           />
+          {itemNumber > 0 ? <div>{itemNumber}</div> : ''}
         </li>
       </ul>
     </nav>

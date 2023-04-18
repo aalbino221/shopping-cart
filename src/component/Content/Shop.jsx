@@ -15,7 +15,7 @@ export default function Shop({ items }) {
           if (hasUndefinedValue) return null;
           return typeof item === 'object' ? (
             <Link
-              to={`/item/${item.id}`}
+              to={`/shop/${item.id}`}
               className="routerBook"
               state={{ item }}
               key={item.id}

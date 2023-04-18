@@ -12,30 +12,29 @@ import CartContext, { Cart } from './component/Content/Cart';
 
 function App() {
   const [itemList, setItemList] = useState([]);
-  const [visible, setVisible] = useState(1);
+  const [visible, setVisible] = useState(0);
 
   const handleCartVisible = () => {
     setVisible(visible === 1 ? 0 : 1);
   };
 
   useEffect(() => {
-    setItemList([
-      {
-        id: 1,
-        name: "George Orwell's 1984",
-        description:
-          '1984 is a classic dystopian novel written by George Orwell. The book presents a society governed by a totalitarian and oppressive State, where individual freedom is suppressed and the manipulation of truth is a common practice. The main character, Winston Smith, works at the Ministry of Truth, and questions the control exerted by the government. He ends up getting involved in a forbidden romance with a colleague, which leads him to rebel against authority. With an intense and engaging narrative, "1984" is a timeless work that continues to challenge and provoke reflections on power and freedom.',
-        price: 20.5,
-        img: './imgs/1984.jpg',
-        amount: 2,
-      },
-    ]);
-  }, []);
+    const handleEsc = (event) => {
+      if (event.keyCode === 27 && visible) {
+        setVisible(0);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [visible, setVisible]);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Header handleCart={handleCartVisible} />
+        <Header handleCart={handleCartVisible} itemList={itemList} />
         <CartContext.Provider
           value={useMemo(() => [itemList, setItemList], [itemList])}
         >
@@ -44,7 +43,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/shop" element={<Shop items={itemsList} />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/item/:id" element={<Item />} />
+              <Route path="/shop/:id" element={<Item />} />
             </Routes>
             <Footer />
           </div>

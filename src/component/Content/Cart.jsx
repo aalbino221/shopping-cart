@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-unused-vars */
@@ -21,6 +22,12 @@ export function Cart({ visible, handleCart }) {
 
   function decrement(id) {
     const index = itemList.findIndex((item) => item.id === id);
+    if (itemList[index].amount - 1 <= 0) {
+      const newArray = [...itemList];
+      newArray.splice(index, 1); // remove o item do array
+      setItemList(newArray);
+      return;
+    }
     const newArray = [...itemList];
     newArray[index].amount -= 1;
     setItemList(newArray);
@@ -31,7 +38,7 @@ export function Cart({ visible, handleCart }) {
     itemList.forEach((item) => {
       totalCost += item.amount * item.price;
     });
-    setTotal(totalCost);
+    setTotal(totalCost.toFixed(2));
   }
 
   useEffect(() => {
@@ -57,34 +64,36 @@ export function Cart({ visible, handleCart }) {
             </span>
           </h1>
         </div>
-        {itemList.map((item) => (
-          <div key={item.id} className="cart-item">
-            <img src={`${item.img}`} alt="" />
-            <div>
-              <p>{item.name}</p>
-              <p>${item.price}</p>
+        <div className="cart-itemsList">
+          {itemList.map((item) => (
+            <div key={item.id} className="cart-item">
+              <img src={`.${item.img}`} alt="" />
               <div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    decrement(item.id);
-                  }}
-                >
-                  -
-                </button>
-                <p data-testid="item-qnt">{item.amount}</p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    increment(item.id);
-                  }}
-                >
-                  +
-                </button>
+                <p>{item.name}</p>
+                <p>${item.price.toFixed(2)}</p>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      decrement(item.id);
+                    }}
+                  >
+                    -
+                  </button>
+                  <p data-testid="item-qnt">{item.amount}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      increment(item.id);
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         <p>Total: ${total}</p>
         <button type="button">CHECKOUT</button>
       </div>

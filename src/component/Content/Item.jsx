@@ -8,7 +8,24 @@ import CartContext from './Cart';
 export default function Item() {
   const location = useLocation();
   const { item } = location.state;
-  const [addToMockCart] = useContext(CartContext);
+  const [itemList, setItemList] = useContext(CartContext);
+
+  function addToCart(id) {
+    const index = itemList.findIndex((currentItem) => currentItem.id === id);
+    if (index === -1) {
+      const newArray = [...itemList, item];
+      setItemList(newArray);
+      return;
+    }
+    const newArray = [...itemList];
+    newArray[index].amount += 1;
+    setItemList(newArray);
+  }
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    addToCart(item.id);
+  };
 
   return Object.keys(item).length === 0 || typeof item !== 'object' ? (
     <h1>This item does not exist</h1>
@@ -26,13 +43,8 @@ export default function Item() {
         <div>
           <h1>{item.name}</h1>
           <p>{item.description}</p>
-          <h1 id="item-price">${item.price}</h1>
-          <button
-            type="button"
-            onClick={() => {
-              addToMockCart(item);
-            }}
-          >
+          <h1 id="item-price">${item.price.toFixed(2)}</h1>
+          <button type="button" onClick={handleClick}>
             BUY
           </button>
         </div>
