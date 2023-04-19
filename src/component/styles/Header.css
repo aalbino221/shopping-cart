@@ -43,8 +43,8 @@
 }
 
 .header li:nth-child(4) > div {
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 1.3rem;
+  width: 1.3rem;
   position: absolute;
   top: -12px;
   right: -12px;
@@ -54,6 +54,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }

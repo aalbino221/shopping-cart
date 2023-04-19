@@ -38,7 +38,7 @@ export default function Item() {
       </div>
       <div>
         <div className="item-img">
-          <img src={`.${item.img}`} alt="" />
+          <img src={item.img} alt="" />
         </div>
         <div>
           <h1>{item.name}</h1>

@@ -68,7 +68,7 @@ export function Cart({ visible, handleCart }) {
         <div className="cart-itemsList">
           {itemList.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={`.${item.img}`} alt="" />
+              <img src={item.img} alt="" />
               <div>
                 <p>{item.name}</p>
                 <p>${item.price.toFixed(2)}</p>

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useMemo, useState } from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Header from './component/Header';
 import Footer from './component/Footer';
 import Home from './component/Content/Home';
@@ -32,7 +32,7 @@ function App() {
   }, [visible, setVisible]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App">
         <Header handleCart={handleCartVisible} itemList={itemList} />
         <CartContext.Provider
@@ -40,7 +40,7 @@ function App() {
         >
           <div className="content">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="" element={<Home />} />
               <Route path="/shop" element={<Shop items={itemsList} />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/shop/:id" element={<Item />} />
@@ -50,7 +50,7 @@ function App() {
           <Cart visible={visible} handleCart={handleCartVisible} />
         </CartContext.Provider>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
