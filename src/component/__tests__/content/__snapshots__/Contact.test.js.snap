@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact Component Renders Correctly 1`] = `
+<div>
+  <div
+    class="contact"
+  >
+    <i
+      class="fa-brands fa-github"
+    />
+    <i
+      class="fa-brands fa-instagram"
+    />
+    <i
+      class="fa-brands fa-linkedin"
+    />
+  </div>
+</div>
+`;

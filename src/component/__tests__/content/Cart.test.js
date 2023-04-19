@@ -1,42 +1,45 @@
-it('No test', () => {});
-
-{
-  /*import React from 'react';
+import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'; // optional
 import userEvent from '@testing-library/user-event';
 import { Cart } from '../../Content/Cart';
 import CartContext from '../../Content/Cart';
 
-let itemList = [
-  {
-    name: 'Book1',
-    price: '$20',
-    img: 'first-img',
-    amount: 1,
-    id: 1,
-  },
-];
+let itemList = [];
 
 const mockNoitems = [];
 
-const setMockList = jest.fn();
+function setMockList(item) {
+  console.log(item);
+  itemList = item;
+}
 
 describe('Cart component', () => {
+  beforeEach(
+    () =>
+      (itemList = [
+        {
+          name: 'Book1',
+          price: 20,
+          dscription: '',
+          img: 'first-img',
+          amount: 1,
+          id: 1,
+        },
+      ]),
+  );
   afterEach(cleanup);
 
-  it('Renders correctly', () => {});
-
-  it.skip('Renders item if cartList has items', () => {
+  it('Renders item if cartList has items', () => {
     render(
-      <CartContext.Provider value={[mockList, setMockList]}>
+      <CartContext.Provider value={[itemList, setMockList]}>
         <Cart />
       </CartContext.Provider>,
     );
     expect(screen.getByText('Book1')).toBeInTheDocument();
   });
 
-  it.skip('Does not render items if carList has no items', () => {
+  it('Does not render items if carList has no items', () => {
     render(
       <CartContext.Provider value={[[], setMockList]}>
         <Cart />
@@ -47,52 +50,68 @@ describe('Cart component', () => {
 
   describe('There are items', () => {
     it('Increments correctly', async () => {
-      let mockList = itemList;
-      const setMockList = (array) => {
-        mockList = array;
-      };
       const user = userEvent.setup();
       render(
-        <CartContext.Provider value={[mockList, setMockList]}>
+        <CartContext.Provider value={[itemList, setMockList]}>
           <Cart />
         </CartContext.Provider>,
       );
-      const btn = screen.getByRole('button', { name: '+' });
+      const btn = screen.getByText('+');
       await user.click(btn);
-      expect(setMockList).toHaveBeenCalled;
+      expect(itemList[0].amount).toBe(2);
       await user.click(btn);
-      expect(setMockList).toHaveBeenCalledTimes(2);
+      expect(itemList[0].amount).toBe(3);
     });
 
-    it.skip('Decrements correctly', async () => {
+    it('Decrements correctly', async () => {
       render(
-        <CartContext.Provider value={[mockList, setMockList]}>
+        <CartContext.Provider value={[itemList, setMockList]}>
           <Cart />
         </CartContext.Provider>,
       );
       const user = userEvent.setup();
-      const btn = screen.getByRole('button', { name: '+' });
-      const btn2 = screen.getByRole('button', { name: '-' });
+      const btn = screen.getByText('+');
+      const btn2 = screen.getByText('-');
       await user.click(btn);
-      expect(setMockList).toHaveBeenCalled;
-      await user.click(btn);
-      expect(setMockList).toHaveBeenCalledTimes(2);
-    });
-
-    it.skip('If item quantity <= 0, remove item', async () => {
-      render(
-        <CartContext.Provider value={[mockList, setMockList]}>
-          <Cart />
-        </CartContext.Provider>,
-      );
-      const user = userEvent.setup();
-      const btn2 = screen.getByRole('button', { name: '-' });
+      expect(itemList[0].amount).toBe(2);
       await user.click(btn2);
-      expect(screen.getByText('Book1')).toBeInTheDocument();
+      expect(itemList[0].amount).toBe(1);
     });
 
-    it('Does not accept negative total value', () => {});
+    it('If item quantity <= 0, remove item', async () => {
+      const { rerender } = render(
+        <CartContext.Provider value={[itemList, setMockList]}>
+          <Cart />
+        </CartContext.Provider>,
+      );
+      const user = userEvent.setup();
+      const btn2 = screen.getByText('-');
+      await user.click(btn2);
+      rerender(
+        <CartContext.Provider value={[itemList, setMockList]}>
+          <Cart />
+        </CartContext.Provider>,
+      );
+      expect(screen.queryByText('Book1')).not.toBeInTheDocument();
+    });
+
+    it('Does not accept negative total value', () => {
+      const negativeItemList = [
+        {
+          name: 'Book1',
+          price: -20,
+          dscription: '',
+          img: 'first-img',
+          amount: 1,
+          id: 1,
+        },
+      ];
+      render(
+        <CartContext.Provider value={[negativeItemList, setMockList]}>
+          <Cart />
+        </CartContext.Provider>,
+      );
+      expect(screen.getByText('Total: $Error')).toBeInTheDocument();
+    });
   });
 });
-*/
-}

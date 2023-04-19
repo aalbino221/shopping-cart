@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Component Renders Correctly 1`] = `
+<div>
+  <div
+    class="footer"
+    style="display: flex; justify-content: center; align-items: center; font-size: 1.5rem; padding: 3rem;"
+  >
+    <a
+      href="https://github.com/aalbino221"
+      style="text-decoration: none; color: black;"
+    >
+      <i
+        class="fa-brands fa-github"
+        style="margin-right: 0.2rem;"
+      />
+      aalbino221
+    </a>
+  </div>
+</div>
+`;

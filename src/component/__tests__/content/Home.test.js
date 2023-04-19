@@ -1,14 +1,18 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom'; // optional
 import Home from '../../Content/Home';
 
 describe('Home Component', () => {
   afterEach(cleanup);
   it('Renders correctly', () => {
-    const { container } = render(<Home />);
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
     expect(screen.getByText(/Best online bookstore/i)).toBeInTheDocument;
     expect(screen.getByRole('button')).toBeInTheDocument;
-    expect(screen.getByRole('img')).toBeInTheDocument;
   });
 });

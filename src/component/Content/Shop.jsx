@@ -9,22 +9,19 @@ export default function Shop({ items }) {
     <div className="shop">
       {items.length > 0 ? (
         items.map((item) => {
-          const hasUndefinedValue = Object.values(item).some(
-            (v) => v === undefined || v === null,
-          );
-          if (hasUndefinedValue) return null;
-          return typeof item === 'object' ? (
-            <Link
-              to={`/shop/${item.id}`}
-              className="routerBook"
-              state={{ item }}
-              key={item.id}
-            >
-              <Card item={item} />
-            </Link>
-          ) : (
-            ''
-          );
+          if (typeof item === 'object') {
+            return (
+              <Link
+                to={`/shop/${item.id}`}
+                className="routerBook"
+                state={{ item }}
+                key={item.id}
+              >
+                <Card item={item} />
+              </Link>
+            );
+          }
+          return null;
         })
       ) : (
         <h1>No Items</h1>

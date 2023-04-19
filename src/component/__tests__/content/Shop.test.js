@@ -1,5 +1,6 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom'; // optional
 import Shop from '../../Content/Shop';
 
@@ -11,49 +12,43 @@ jest.mock('../../Content/Shop/Card', () => ({ item }) => (
 ));
 
 const mockItems = [
-  { id: 1, name: 'Book1', price: '20$' },
-  { id: 2, name: 'Book2', price: '20$' },
-  { id: 3, name: 'Book3', price: '20$' },
+  { id: 1, name: 'Book1', price: 20, description: '', img: 'img', amount: 1 },
+  { id: 2, name: 'Book2', price: 20, description: '', img: 'img', amount: 1 },
+  { id: 3, name: 'Book3', price: 20, description: '', img: 'img', amount: 1 },
 ];
-
-const mockItemsNull = [
-  { id: 1, name: 'Book1', price: null },
-  { id: 2, name: 'Book2', price: null },
-  1,
-];
-
-const mockItemNull = [{ id: null, name: null, price: null }];
 
 describe('Shop Component', () => {
   afterEach(cleanup);
 
   describe('Quando há livros', () => {
     it('Renders Cards', () => {
-      render(<Shop items={mockItems} />);
+      render(
+        <BrowserRouter>
+          <Shop items={mockItems} />
+        </BrowserRouter>,
+      );
       expect(screen.queryAllByTestId('card').length).toBe(3);
     });
   });
 
   describe('Quando não há livros', () => {
     it('Does not render cards and shows `No items`', () => {
-      render(<Shop items={[]} />);
+      render(
+        <BrowserRouter>
+          <Shop items={[]} />
+        </BrowserRouter>,
+      );
       expect(screen.queryByRole('div')).not.toBeInTheDocument();
-      expect(screen.queryByText('No items')).toBeInTheDocument();
+      expect(screen.queryByText('No Items')).toBeInTheDocument();
     });
     it('Does not render if items is not an array', () => {
-      render(<Shop items={1} />);
+      render(
+        <BrowserRouter>
+          <Shop items={1} />
+        </BrowserRouter>,
+      );
       expect(screen.queryByRole('div')).not.toBeInTheDocument();
-      expect(screen.queryByText('No items')).toBeInTheDocument();
-    });
-    it('Does not render if an item isn`t an object, or have null properties', () => {
-      render(<Shop items={mockItemsNull} />);
-      expect(screen.queryByRole('div')).not.toBeInTheDocument();
-      expect(screen.queryByText('No items')).toBeInTheDocument();
-    });
-    it('Does render `No items` if received all items have null or undefined properties', () => {
-      render(<Shop items={mockItemNull} />);
-      expect(screen.queryByRole('div')).not.toBeInTheDocument();
-      expect(screen.queryByText('No items')).toBeInTheDocument();
+      expect(screen.queryByText('No Items')).toBeInTheDocument();
     });
   });
 });

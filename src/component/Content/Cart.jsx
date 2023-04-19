@@ -38,7 +38,8 @@ export function Cart({ visible, handleCart }) {
     itemList.forEach((item) => {
       totalCost += item.amount * item.price;
     });
-    setTotal(totalCost.toFixed(2));
+    if (totalCost < 0) setTotal('Error');
+    else setTotal(totalCost.toFixed(2));
   }
 
   useEffect(() => {
