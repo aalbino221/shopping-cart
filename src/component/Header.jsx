@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Header({ handleCart, itemList }) {
+function Header({ handleCart, itemList }) {
   const [itemNumber, setItemNumber] = useState(0);
 
   useEffect(() => {
@@ -43,3 +43,15 @@ export default function Header({ handleCart, itemList }) {
     </nav>
   );
 }
+
+Header.propTypes = {
+  handleCart: PropTypes.func.isRequired,
+  itemList: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
+
+export default Header;

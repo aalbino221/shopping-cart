@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import CartContext from '../Cart';
 
-export default function Card({ item }) {
+function Card({ item }) {
   const [itemList, setItemList] = useContext(CartContext);
 
   function addToCart(id) {
@@ -39,3 +39,16 @@ export default function Card({ item }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  item: PropTypes.exact({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+export default Card;

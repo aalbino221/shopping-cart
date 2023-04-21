@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import CartContext from './Cart';
@@ -43,7 +40,10 @@ export default function Item() {
         <div>
           <h1>{item.name}</h1>
           <p>{item.description}</p>
-          <h1 id="item-price">${item.price.toFixed(2)}</h1>
+          <h1 id="item-price">
+            $
+            {item.price.toFixed(2)}
+          </h1>
           <button type="button" onClick={handleClick}>
             BUY
           </button>

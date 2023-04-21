@@ -1,15 +1,13 @@
-/* eslint-disable operator-linebreak */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line object-curly-newline
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext, useContext, useState, useEffect,
+} from 'react';
+import PropTypes from 'prop-types';
 
 const CartContext = createContext();
 
 export default CartContext;
 
-export function Cart({ visible, handleCart }) {
+function Cart({ visible, handleCart }) {
   const [itemList, setItemList] = useContext(CartContext);
   const [total, setTotal] = useState(0);
 
@@ -71,7 +69,10 @@ export function Cart({ visible, handleCart }) {
               <img src={item.img} alt="" />
               <div>
                 <p>{item.name}</p>
-                <p>${item.price.toFixed(2)}</p>
+                <p>
+                  $
+                  {item.price.toFixed(2)}
+                </p>
                 <div>
                   <button
                     type="button"
@@ -95,9 +96,19 @@ export function Cart({ visible, handleCart }) {
             </div>
           ))}
         </div>
-        <p>Total: ${total}</p>
+        <p>
+          Total: $
+          {total}
+        </p>
         <button type="button">CHECKOUT</button>
       </div>
     </div>
   );
 }
+
+Cart.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  handleCart: PropTypes.func.isRequired,
+};
+
+export { Cart };

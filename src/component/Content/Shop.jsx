@@ -1,10 +1,9 @@
-/* eslint-disable indent */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Card from './Shop/Card';
 
-export default function Shop({ items }) {
+function Shop({ items }) {
   return (
     <div className="shop">
       {items.length > 0 ? (
@@ -29,3 +28,18 @@ export default function Shop({ items }) {
     </div>
   );
 }
+
+Shop.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      img: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
+
+export default Shop;
